@@ -1,0 +1,159 @@
+TRAINING REPORT
+
+What was done
+  Models were trained on train only, tuned only on valid, then retrained on train+valid and
+  scored once on test. Train <= 2024-12-31, valid <= 2025-12-31, test after that. Nothing was shuffled.
+  The 'naive' rule says the price N days ahead equals today's price. Skill vs naive is the
+  percentage improvement in MAE over naive (positive = better than naive).
+  Rows used for scoring: valid rows whose target date falls after the valid period are left out
+  (so no test-period price influences any choice); naive is recomputed on exactly the scored rows.
+  Training rows for the tabular models also need their target date inside the training period.
+
+How horizons were handled
+  SARIMA and SARIMAX work on weekly averages. 7, 14 and 30 days map to 1, 2 and 4 weekly steps
+  (30 days is 4.3 weeks, so the nearest step is 4). A daily row t uses the forecast made at the
+  last Sunday on or before t, so only data up to t is used.
+  Weather inputs for SARIMAX and Prophet are shifted back by the horizon (7/14/30 days, or 1/2/4 weeks):
+  the forecast for t+h uses weather from t or earlier only.
+
+Test results (overall, all districts pooled at district level)
+   level commodity  horizon                     model   n    MAE    RMSE  MAPE_percent  direction_accuracy  naive_MAE  skill_vs_naive_percent
+district     Onion        7                   XGBoost 398 277.82  367.62         23.60                0.64     277.88                    0.02
+district     Onion        7      XGBoost (no weather) 398 278.20  368.63         23.58                0.65     277.88                   -0.12
+district     Onion        7 RandomForest (no weather) 398 290.81  411.41         26.80                0.61     277.88                   -4.65
+district     Onion        7              RandomForest 398 295.09  411.69         26.84                0.59     277.88                   -6.19
+district     Onion       14      XGBoost (no weather) 371 305.48  388.98         26.72                0.69     348.94                   12.45
+district     Onion       14                   XGBoost 371 306.48  390.50         26.16                0.69     348.94                   12.17
+district     Onion       14              RandomForest 371 307.33  398.26         27.48                0.68     348.94                   11.93
+district     Onion       14 RandomForest (no weather) 371 314.40  408.41         28.02                0.68     348.94                    9.90
+district     Onion       30 RandomForest (no weather) 308 345.80  439.13         30.88                0.62     405.92                   14.81
+district     Onion       30              RandomForest 308 350.14  440.14         31.32                0.67     405.92                   13.74
+district     Onion       30      XGBoost (no weather) 308 354.47  426.46         31.82                0.67     405.92                   12.68
+district     Onion       30                   XGBoost 308 405.90  773.86         36.87                0.68     405.92                    0.01
+district    Tomato        7                   XGBoost 414 375.77  533.37         27.26                0.74     471.18                   20.25
+district    Tomato        7              RandomForest 414 388.74  536.25         28.59                0.68     471.18                   17.50
+district    Tomato        7 RandomForest (no weather) 414 408.11  587.31         30.18                0.66     471.18                   13.39
+district    Tomato        7      XGBoost (no weather) 414 410.59  594.47         29.92                0.68     471.18                   12.86
+district    Tomato       14 RandomForest (no weather) 377 376.25  519.23         29.26                0.73     551.71                   31.80
+district    Tomato       14                   XGBoost 377 408.55  554.84         31.80                0.74     551.71                   25.95
+district    Tomato       14              RandomForest 377 435.08  597.71         34.73                0.71     551.71                   21.14
+district    Tomato       14      XGBoost (no weather) 377 462.88  671.51         35.84                0.71     551.71                   16.10
+district    Tomato       30                   XGBoost 280 338.26  442.84         27.05                0.88     730.03                   53.66
+district    Tomato       30 RandomForest (no weather) 280 350.44  464.29         28.75                0.84     730.03                   52.00
+district    Tomato       30      XGBoost (no weather) 280 382.13  461.01         39.30                0.82     730.03                   47.66
+district    Tomato       30              RandomForest 280 404.30  532.28         35.03                0.82     730.03                   44.62
+   state     Onion        7         SARIMAX (weather)  67 191.75  265.12         11.98                0.52     180.00                   -6.53
+   state     Onion        7                    SARIMA  67 208.68  267.28         13.12                0.46     180.00                  -15.93
+   state     Onion        7                   Prophet  67 708.83  741.90         44.79                0.55     180.00                 -293.78
+   state     Onion        7         Prophet (weather)  67 711.53  745.14         45.12                0.55     180.00                 -295.28
+   state     Onion       14                    SARIMA  62 190.42  235.49         12.27                0.53     158.26                  -20.32
+   state     Onion       14         SARIMAX (weather)  62 192.73  237.48         12.44                0.53     158.26                  -21.78
+   state     Onion       14         Prophet (weather)  62 721.04  738.74         46.52                0.61     158.26                 -355.60
+   state     Onion       14                   Prophet  62 731.35  747.14         47.07                0.61     158.26                 -362.12
+   state     Onion       30         SARIMAX (weather)  53 164.72  225.85         10.64                0.74     210.29                   21.67
+   state     Onion       30                    SARIMA  53 174.37  232.60         11.35                0.72     210.29                   17.08
+   state     Onion       30         Prophet (weather)  53 827.23  857.14         53.33                0.75     210.29                 -293.38
+   state     Onion       30                   Prophet  53 870.00  903.88         56.19                0.75     210.29                 -313.72
+   state    Tomato        7                    SARIMA  53 341.70  458.85         24.05                0.68     292.07                  -16.99
+   state    Tomato        7         SARIMAX (weather)  53 364.70  436.72         26.44                0.60     292.07                  -24.87
+   state    Tomato        7                   Prophet  53 671.31  754.95         45.45                0.68     292.07                 -129.84
+   state    Tomato        7         Prophet (weather)  53 758.89  853.22         51.79                0.68     292.07                 -159.83
+   state    Tomato       14                    SARIMA  47 517.77  698.17         35.77                0.43     396.03                  -30.74
+   state    Tomato       14         SARIMAX (weather)  47 519.01  699.39         35.86                0.43     396.03                  -31.05
+   state    Tomato       14                   Prophet  47 685.79  746.12         47.91                0.60     396.03                  -73.17
+   state    Tomato       14         Prophet (weather)  47 765.37  822.23         53.89                0.60     396.03                  -93.26
+   state    Tomato       30                   Prophet  39 283.43  334.68         22.54                0.82     613.48                   53.80
+   state    Tomato       30         Prophet (weather)  39 461.32  557.33         36.98                0.85     613.48                   24.80
+   state    Tomato       30         SARIMAX (weather)  39 754.71 1014.22         60.26                0.41     613.48                  -23.02
+   state    Tomato       30                    SARIMA  39 760.50 1011.03         60.92                0.44     613.48                  -23.96
+
+Winner per level, commodity and horizon (chosen by VALID MAE, then reported on test)
+  state    Onion   h7   SARIMA                     valid skill -16.7% | test MAE 209 vs naive 180 (skill -15.9%, MAPE 13.1%)  <-- NOT better than naive on validation
+  state    Onion   h14  SARIMA                     valid skill -9.8% | test MAE 190 vs naive 158 (skill -20.3%, MAPE 12.3%)  <-- NOT better than naive on validation
+  state    Onion   h30  SARIMA                     valid skill -1.2% | test MAE 174 vs naive 210 (skill +17.1%, MAPE 11.3%)  <-- NOT better than naive on validation
+  state    Tomato  h7   SARIMAX (weather)          valid skill -20.4% | test MAE 365 vs naive 292 (skill -24.9%, MAPE 26.4%)  <-- NOT better than naive on validation
+  state    Tomato  h14  SARIMA                     valid skill -17.5% | test MAE 518 vs naive 396 (skill -30.7%, MAPE 35.8%)  <-- NOT better than naive on validation
+  state    Tomato  h30  SARIMAX (weather)          valid skill -11.4% | test MAE 755 vs naive 613 (skill -23.0%, MAPE 60.3%)  <-- NOT better than naive on validation
+  district Onion   h7   XGBoost (no weather)       valid skill +2.5% | test MAE 278 vs naive 278 (skill -0.1%, MAPE 23.6%)
+  district Onion   h14  XGBoost (no weather)       valid skill +8.3% | test MAE 305 vs naive 349 (skill +12.5%, MAPE 26.7%)
+  district Onion   h30  XGBoost (no weather)       valid skill +8.1% | test MAE 354 vs naive 406 (skill +12.7%, MAPE 31.8%)
+  district Tomato  h7   XGBoost                    valid skill -1.8% | test MAE 376 vs naive 471 (skill +20.2%, MAPE 27.3%)  <-- NOT better than naive on validation
+  district Tomato  h14  XGBoost (no weather)       valid skill -6.8% | test MAE 463 vs naive 552 (skill +16.1%, MAPE 35.8%)  <-- NOT better than naive on validation
+  district Tomato  h30  XGBoost                    valid skill -28.0% | test MAE 338 vs naive 730 (skill +53.7%, MAPE 27.0%)  <-- NOT better than naive on validation
+
+Models that did not beat naive on validation (overall rows)
+  40 of 48 model/commodity/horizon combinations are not better than naive on valid.
+    district Onion h7 RandomForest: skill -1.7%
+    district Onion h7 RandomForest (no weather): skill -2.2%
+    district Onion h14 RandomForest: skill -0.9%
+    district Onion h30 RandomForest (no weather): skill -6.0%
+    district Tomato h7 XGBoost: skill -1.8%
+    district Tomato h7 XGBoost (no weather): skill -3.1%
+    district Tomato h7 RandomForest: skill -3.6%
+    district Tomato h7 RandomForest (no weather): skill -9.5%
+    district Tomato h14 XGBoost: skill -8.3%
+    district Tomato h14 XGBoost (no weather): skill -6.8%
+    district Tomato h14 RandomForest: skill -18.8%
+    district Tomato h14 RandomForest (no weather): skill -24.5%
+    district Tomato h30 XGBoost: skill -28.0%
+    district Tomato h30 XGBoost (no weather): skill -36.3%
+    district Tomato h30 RandomForest: skill -39.3%
+    district Tomato h30 RandomForest (no weather): skill -56.0%
+    state Onion h7 SARIMA: skill -16.7%
+    state Onion h7 SARIMAX (weather): skill -21.2%
+    state Onion h7 Prophet: skill -265.7%
+    state Onion h7 Prophet (weather): skill -228.5%
+    state Onion h14 SARIMA: skill -9.8%
+    state Onion h14 SARIMAX (weather): skill -10.6%
+    state Onion h14 Prophet: skill -208.4%
+    state Onion h14 Prophet (weather): skill -160.1%
+    state Onion h30 SARIMA: skill -1.2%
+    state Onion h30 SARIMAX (weather): skill -1.4%
+    state Onion h30 Prophet: skill -175.1%
+    state Onion h30 Prophet (weather): skill -128.7%
+    state Tomato h7 SARIMA: skill -25.3%
+    state Tomato h7 SARIMAX (weather): skill -20.4%
+    state Tomato h7 Prophet: skill -294.6%
+    state Tomato h7 Prophet (weather): skill -287.6%
+    state Tomato h14 SARIMA: skill -17.5%
+    state Tomato h14 SARIMAX (weather): skill -18.3%
+    state Tomato h14 Prophet: skill -215.5%
+    state Tomato h14 Prophet (weather): skill -216.7%
+    state Tomato h30 SARIMA: skill -11.7%
+    state Tomato h30 SARIMAX (weather): skill -11.4%
+    state Tomato h30 Prophet: skill -132.4%
+    state Tomato h30 Prophet (weather): skill -88.9%
+
+Did weather help? (MAE change when weather is added; negative = better with weather)
+verdict                                          better  same  worse
+pair                                      split                     
+Prophet (weather) vs Prophet              test        2     1      3
+                                          valid       5     1      0
+RandomForest vs RandomForest (no weather) test        2     0      4
+                                          valid       4     1      1
+SARIMAX (weather) vs SARIMA               test        2     2      2
+                                          valid       1     4      1
+XGBoost vs XGBoost (no weather)           test        3     2      1
+                                          valid       2     1      3
+  mean MAE change with weather, percent:
+pair                                       split
+Prophet (weather) vs Prophet               test     13.58
+                                           valid   -10.48
+RandomForest vs RandomForest (no weather)  test      4.46
+                                           valid    -4.42
+SARIMAX (weather) vs SARIMA                test     -1.04
+                                           valid     0.22
+XGBoost vs XGBoost (no weather)            test     -2.83
+                                           valid     0.39
+
+Leakage checks
+  naive MAE recomputed vs baseline_scores.csv on test: 0 of 12 differ
+  no score had MAPE under 1% or skill above 60%.
+  features per model audited: no target or future column, only data up to day t.
+
+Notes
+  state-level work uses weather_daily_long.csv (average over all districts) for the weather inputs
+  direction accuracy is only judged on rows where the price actually changed
+  total run time 7.3 minutes
+
+Saved models (48): see output/models/

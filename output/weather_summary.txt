@@ -1,0 +1,92 @@
+OPEN-METEO DAILY WEATHER SUMMARY
+
+Locations (districts) with weather: 25
+Districts without coordinates: none
+Requested range: 2021-01-01 to 2026-11-03
+Last valid date: 2026-11-03
+Variables dropped (not supported): none
+
+District to place matching
+district                   place          admin2                    state      latitude  longitude note                                     
+                  bagalkot       Bagalkot                  Bagalkot Karnataka 16.18673  75.69614                                            
+                 bangalore      Bengaluru           Bengaluru Urban Karnataka 12.97194  77.59369                        found as 'bengaluru'
+                   belgaum       Belagavi          Belgaum district Karnataka 15.85212  74.50447                         found as 'belagavi'
+                   bellary        Ballari                   Ballari Karnataka 15.14205  76.92398                          found as 'ballari'
+                     bidar          Bidar            Bīdar District Karnataka 17.90802  77.51524                                            
+                   bijapur        Bijapur          Bijāpur District Karnataka 16.82442  75.71537                                            
+              chamrajnagar   Chamrajnagar            Chamarajanagar Karnataka 11.92312  76.93949                                            
+               chikmagalur Chikkamagaluru            Chikkamagaluru Karnataka 13.32231  75.77400   matched name differs (population 121,484)
+               chitradurga    Chitradurga      Chitradurga district Karnataka 14.22262  76.40038                                            
+                 davangere      Davangere                 Davangere Karnataka 14.46693  75.92694                                            
+                   dharwad        Dharwad          Dharwad district Karnataka 15.46005  75.00778                                            
+                     gadag Gadag-Betageri                     Gadag Karnataka 15.41670  75.61670   matched name differs (population 172,813)
+                    hassan         Hassan                    Hassan Karnataka 13.00715  76.09620                                            
+                    haveri         Hāveri                    Haveri Karnataka 14.79354  75.40448                                            
+                  kalburgi     Kalaburagi                Kalaburagi Karnataka 17.33583  76.83757                       found as 'kalaburagi'
+                     kolar          Kolār            Kolar district Karnataka 13.13768  78.12999                                            
+                    koppal         Koppal                    Koppal Karnataka 15.34522  76.15478                                            
+         madikeri (kodagu)       Madikeri                     Coorg Karnataka 12.42602  75.73820                                            
+                    mandya         Mandya                    Mandya Karnataka 12.52230  76.89746                                            
+mangalore (dakshin kannad)      Mangaluru Dakshina Kannada District Karnataka 12.91723  74.85603                        found as 'mangaluru'
+                    mysore         Mysuru                    Mysuru Karnataka 12.29791  76.63925                           found as 'mysuru'
+                   raichur        Rāichūr          Raichur district Karnataka 16.20546  77.35567                                            
+                   shimoga     Shivamogga          Shimoga District Karnataka 13.93157  75.56791                       found as 'shivamogga'
+                    tumkur       Tumakuru                    Tumkūr Karnataka 13.34136  77.10220   matched name differs (population 307,359)
+                     udupi          Udupi                     Udupi Karnataka 13.33467  74.74617                                            
+
+Rows per location and grid cell used by the api
+  bagalkot: 2,133 rows, requested (16.18673, 75.69614), grid cell (16.203865, 75.65465), elevation 528.0 m
+  bangalore: 2,133 rows, requested (12.97194, 77.59369), grid cell (12.970123, 77.56364), elevation 918.0 m
+  belgaum: 2,133 rows, requested (15.85212, 74.50447), grid cell (15.852372, 74.53258), elevation 762.0 m
+  bellary: 2,133 rows, requested (15.14205, 76.92398), grid cell (15.1493845, 76.95042), elevation 454.0 m
+  bidar: 2,133 rows, requested (17.90802, 77.51524), grid cell (17.891035, 77.50486), elevation 672.0 m
+  bijapur: 2,133 rows, requested (16.82442, 75.71537), grid cell (16.836554, 75.703354), elevation 599.0 m
+  chamrajnagar: 2,133 rows, requested (11.92312, 76.93949), grid cell (11.915642, 76.92377), elevation 716.0 m
+  chikmagalur: 2,133 rows, requested (13.32231, 75.774), grid cell (13.321617, 75.78082), elevation 1042.0 m
+  chitradurga: 2,133 rows, requested (14.22262, 76.40038), grid cell (14.235501, 76.44177), elevation 738.0 m
+  davangere: 2,133 rows, requested (14.46693, 75.92694), grid cell (14.446397, 75.90362), elevation 588.0 m
+  dharwad: 2,133 rows, requested (15.46005, 75.00778), grid cell (15.43058, 75.04225), elevation 728.0 m
+  gadag: 2,133 rows, requested (15.4167, 75.6167), grid cell (15.43058, 75.633804), elevation 662.0 m
+  hassan: 2,133 rows, requested (13.00715, 76.0962), grid cell (12.970123, 76.090904), elevation 954.0 m
+  haveri: 2,133 rows, requested (14.79354, 75.40448), grid cell (14.797891, 75.419), elevation 577.0 m
+  kalburgi: 2,133 rows, requested (17.33583, 76.83757), grid cell (17.328646, 76.82081), elevation 469.0 m
+  kolar: 2,133 rows, requested (13.13768, 78.12999), grid cell (13.110721, 78.11475), elevation 842.0 m
+  koppal: 2,133 rows, requested (15.34522, 76.15478), grid cell (15.360281, 76.15385), elevation 537.0 m
+  madikeri (kodagu): 2,133 rows, requested (12.42602, 75.7382), grid cell (12.407733, 75.70397), elevation 1143.0 m
+  mandya: 2,133 rows, requested (12.5223, 76.89746), grid cell (12.54833, 76.898735), elevation 677.0 m
+  mangalore (dakshin kannad): 2,133 rows, requested (12.91723, 74.85603), grid cell (12.899824, 74.87738), elevation 22.0 m
+  mysore: 2,133 rows, requested (12.29791, 76.63925), grid cell (12.267136, 76.62162), elevation 757.0 m
+  raichur: 2,133 rows, requested (16.20546, 77.35567), grid cell (16.203865, 77.36243), elevation 400.0 m
+  shimoga: 2,133 rows, requested (13.93157, 75.56791), grid cell (13.954306, 75.58011), elevation 589.0 m
+  tumkur: 2,133 rows, requested (13.34136, 77.1022), grid cell (13.321617, 77.09589), elevation 813.0 m
+  udupi: 2,133 rows, requested (13.33467, 74.74617), grid cell (13.321617, 74.79452), elevation 31.0 m
+
+Missing values per column per location (only locations with any)
+  none, every column is complete for every location
+
+Checks (rows are never deleted)
+  bagalkot: ok
+  bangalore: ok
+  belgaum: ok
+  bellary: ok
+  bidar: ok
+  bijapur: ok
+  chamrajnagar: ok
+  chikmagalur: ok
+  chitradurga: ok
+  davangere: ok
+  dharwad: ok
+  gadag: ok
+  hassan: ok
+  haveri: ok
+  kalburgi: ok
+  kolar: ok
+  koppal: ok
+  madikeri (kodagu): ok
+  mandya: ok
+  mangalore (dakshin kannad): ok
+  mysore: ok
+  raichur: ok
+  shimoga: ok
+  tumkur: ok
+  udupi: ok

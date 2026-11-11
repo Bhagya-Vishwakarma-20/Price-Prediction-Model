@@ -1,0 +1,31 @@
+AGMARKNET KARNATAKA ONION/TOMATO CLEANING SUMMARY
+
+Per input file
+  2021.csv: read 3,827,438, matched filter 12,700, rejected 0, kept 12,700, date format: year-first YYYY-MM-DD
+  2022.csv: read 4,476,890, matched filter 12,957, rejected 0, kept 12,957, date format: year-first YYYY-MM-DD
+  2023.csv: read 4,415,690, matched filter 12,033, rejected 0, kept 12,033, date format: year-first YYYY-MM-DD
+  2024.csv: read 5,544,500, matched filter 9,765, rejected 0, kept 9,765, date format: year-first YYYY-MM-DD
+  2025.csv: read 5,819,482, matched filter 5,099, rejected 0, kept 5,097, date format: year-first YYYY-MM-DD
+  2026.csv: read 593,539, matched filter 851, rejected 0, kept 851, date format: year-first YYYY-MM-DD
+
+Total rows kept: 53,403
+
+Rows per commodity (kept)
+  Tomato: 31,283
+  Onion: 22,120
+
+Date range: 2021-01-01 to 2026-04-18
+Markets: 107
+Districts: 25
+Duplicate rows removed: 2
+Flagged rows (kept in data, listed in flagged_rows.csv): 2
+Rejected rows (rejected_rows.csv): 0
+
+State spellings containing 'karnat' (all files)
+  'Karnataka': 796,095
+
+Commodity values containing 'onion' or 'tomato' (all files)
+  value                                karnataka rows  all-state rows   kept?
+  'Onion'                                      22,120       1,034,345     yes
+  'Onion Green'                                     0         112,134      no
+  'Tomato'                                     31,285         979,831     yes

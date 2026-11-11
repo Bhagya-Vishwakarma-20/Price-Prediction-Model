@@ -1,0 +1,18 @@
+# NOTE: correlation is not proof of cause. Pearson correlation of each weather feature with target_change_h14, training rows only, district level.
+commodity,feature,correlation,n
+Onion,ks_temp_mean_30d,0.0749,12388
+Onion,ks_temp_mean_7d,0.0742,12578
+Onion,temp_mean_30d,0.0733,12388
+Onion,temp_mean_7d,0.0715,12578
+Onion,ks_rain_sum_30d,-0.0251,12388
+Onion,ks_rain_sum_7d,-0.022,12578
+Onion,rain_sum_30d,-0.0199,12388
+Onion,rain_sum_7d,-0.0155,12578
+Tomato,temp_mean_30d,0.0367,12482
+Tomato,ks_temp_mean_30d,0.0331,12482
+Tomato,temp_mean_7d,0.0301,12664
+Tomato,ks_temp_mean_7d,0.0266,12664
+Tomato,ks_rain_sum_7d,-0.0215,12664
+Tomato,ks_rain_sum_30d,-0.021,12482
+Tomato,rain_sum_30d,-0.0178,12482
+Tomato,rain_sum_7d,-0.0151,12664

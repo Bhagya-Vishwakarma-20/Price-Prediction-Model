@@ -1,0 +1,130 @@
+DATASET REPORT
+
+Calendar: 2021-01-01 to 2026-04-18 (1,934 days)
+Price aggregation: mean of Modal_Price; MIN_COVERAGE=0.5; MAX_FILL_DAYS=3; MIN_DISTRICTS_REPORTING=5
+Split: train <= 2024-12-31, valid <= 2025-12-31, test after that
+
+Districts dropped for missing weather: none
+
+Coverage by district-commodity pair (share of calendar days with a price)
+  Onion: 25 pairs, kept 9, dropped 16; coverage min 0.1%, median 18.5%, max 81.3%
+      dropped (below MIN_COVERAGE): bagalkot (7.8%), bellary (16.5%), bidar (0.5%), bijapur (18.5%), chamrajnagar (3.4%), chitradurga (0.3%), gadag (6.1%), hassan (38.0%), haveri (6.7%), kalburgi (14.8%), koppal (1.7%), madikeri (kodagu) (0.1%), mandya (8.6%), mangalore (dakshin kannad) (24.9%), raichur (37.2%), tumkur (10.2%)
+      kept: bangalore (62%), belgaum (52%), chikmagalur (62%), davangere (62%), dharwad (70%), kolar (81%), mysore (55%), shimoga (60%), udupi (56%)
+  Tomato: 20 pairs, kept 9, dropped 11; coverage min 0.1%, median 42.4%, max 93.8%
+      dropped (below MIN_COVERAGE): belgaum (34.8%), bellary (16.7%), chitradurga (0.1%), dharwad (0.6%), gadag (0.8%), hassan (36.0%), haveri (5.7%), kalburgi (48.8%), koppal (1.7%), mangalore (dakshin kannad) (14.4%), tumkur (2.6%)
+      kept: bangalore (90%), chamrajnagar (78%), chikmagalur (74%), davangere (52%), kolar (94%), mandya (52%), mysore (78%), shimoga (60%), udupi (56%)
+
+Filled days (price carried forward over gaps of up to MAX_FILL_DAYS)
+  Onion: 4,812 filled days in total; most in: shimoga (645), chikmagalur (622), udupi (610), davangere (582), belgaum (559)
+  Tomato: 3,846 filled days in total; most in: davangere (716), mandya (644), shimoga (643), udupi (518), chikmagalur (408)
+
+Rows per split (rows with a price on day t)
+  district Onion: total 15,644, train 12,869, valid 2,164, test 611
+  district Tomato: total 16,077, train 12,906, valid 2,601, test 570
+  state Onion: total 1,843, train 1,456, valid 300, test 87
+  state Tomato: total 1,844, train 1,457, valid 310, test 77
+
+Rows with a target, per horizon and split
+   level commodity  horizon  train  valid  test
+district     Onion        7  12632   1858   398
+district     Onion       14  12629   1777   371
+district     Onion       30  12613   1656   308
+   state     Onion        7   1451    264    67
+   state     Onion       14   1451    262    62
+   state     Onion       30   1451    252    53
+district    Tomato        7  12721   2403   414
+district    Tomato       14  12712   2358   377
+district    Tomato       30  12713   2233   280
+   state    Tomato        7   1453    287    53
+   state    Tomato       14   1453    285    47
+   state    Tomato       30   1453    272    39
+
+Missing values per column (columns not listed are complete)
+  district Onion (15,644 rows):
+      price_lag_1: 277 (1.8%)
+      price_lag_7: 756 (4.8%)
+      price_lag_14: 867 (5.5%)
+      price_lag_30: 1,067 (6.8%)
+      price_roll_mean_7: 291 (1.9%)
+      price_roll_std_7: 291 (1.9%)
+      price_roll_mean_30: 447 (2.9%)
+      price_roll_std_30: 447 (2.9%)
+      rain_sum_7d: 51 (0.3%)
+      rain_sum_30d: 250 (1.6%)
+      temp_mean_7d: 51 (0.3%)
+      temp_mean_30d: 250 (1.6%)
+      ks_rain_sum_7d: 51 (0.3%)
+      ks_rain_sum_30d: 250 (1.6%)
+      ks_temp_mean_7d: 51 (0.3%)
+      ks_temp_mean_30d: 250 (1.6%)
+      ks_price_lag_7: 119 (0.8%)
+      target_h7: 756 (4.8%)
+      target_change_h7: 756 (4.8%)
+      target_h14: 867 (5.5%)
+      target_change_h14: 867 (5.5%)
+      target_h30: 1,067 (6.8%)
+      target_change_h30: 1,067 (6.8%)
+  district Tomato (16,077 rows):
+      price_lag_1: 195 (1.2%)
+      price_lag_7: 539 (3.4%)
+      price_lag_14: 630 (3.9%)
+      price_lag_30: 851 (5.3%)
+      price_roll_mean_7: 192 (1.2%)
+      price_roll_std_7: 192 (1.2%)
+      price_roll_mean_30: 320 (2.0%)
+      price_roll_std_30: 320 (2.0%)
+      rain_sum_7d: 52 (0.3%)
+      rain_sum_30d: 235 (1.5%)
+      temp_mean_7d: 52 (0.3%)
+      temp_mean_30d: 235 (1.5%)
+      ks_rain_sum_7d: 52 (0.3%)
+      ks_rain_sum_30d: 235 (1.5%)
+      ks_temp_mean_7d: 52 (0.3%)
+      ks_temp_mean_30d: 235 (1.5%)
+      ks_price_lag_7: 101 (0.6%)
+      target_h7: 539 (3.4%)
+      target_change_h7: 539 (3.4%)
+      target_h14: 630 (3.9%)
+      target_change_h14: 630 (3.9%)
+      target_h30: 851 (5.3%)
+      target_change_h30: 851 (5.3%)
+  state Onion (1,843 rows):
+      rain_sum_7d: 6 (0.3%)
+      rain_sum_30d: 29 (1.6%)
+      temp_mean_7d: 6 (0.3%)
+      temp_mean_30d: 29 (1.6%)
+      price_lag_1: 23 (1.2%)
+      price_lag_7: 61 (3.3%)
+      price_lag_14: 68 (3.7%)
+      price_lag_30: 87 (4.7%)
+      price_roll_mean_7: 23 (1.2%)
+      price_roll_std_7: 23 (1.2%)
+      price_roll_mean_30: 28 (1.5%)
+      price_roll_std_30: 28 (1.5%)
+      target_h7: 61 (3.3%)
+      target_change_h7: 61 (3.3%)
+      target_h14: 68 (3.7%)
+      target_change_h14: 68 (3.7%)
+      target_h30: 87 (4.7%)
+      target_change_h30: 87 (4.7%)
+  state Tomato (1,844 rows):
+      rain_sum_7d: 6 (0.3%)
+      rain_sum_30d: 29 (1.6%)
+      temp_mean_7d: 6 (0.3%)
+      temp_mean_30d: 29 (1.6%)
+      price_lag_1: 25 (1.4%)
+      price_lag_7: 51 (2.8%)
+      price_lag_14: 59 (3.2%)
+      price_lag_30: 80 (4.3%)
+      price_roll_mean_7: 29 (1.6%)
+      price_roll_std_7: 29 (1.6%)
+      price_roll_mean_30: 29 (1.6%)
+      price_roll_std_30: 29 (1.6%)
+      target_h7: 51 (2.8%)
+      target_change_h7: 51 (2.8%)
+      target_h14: 59 (3.2%)
+      target_change_h14: 59 (3.2%)
+      target_h30: 80 (4.3%)
+      target_change_h30: 80 (4.3%)
+
+Look-ahead check: passed
